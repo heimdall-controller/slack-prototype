@@ -1,0 +1,19 @@
+domain: heimdallcontroller.io
+layout:
+- go.kubebuilder.io/v3
+plugins:
+  manifests.sdk.operatorframework.io/v2: {}
+  scorecard.sdk.operatorframework.io/v2: {}
+projectName: slack-prototype
+repo: github.com/heimdall-controller/slack-prototype
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: heimdallcontroller.io
+  group: core
+  kind: Resource
+  path: github.com/heimdall-controller/slack-prototype/api/v1
+  version: v1
+version: "3"
