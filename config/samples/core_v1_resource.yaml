@@ -1,0 +1,12 @@
+apiVersion: core.heimdallcontroller.io/v1
+kind: Resource
+metadata:
+  labels:
+    app.kubernetes.io/name: resource
+    app.kubernetes.io/instance: resource-sample
+    app.kubernetes.io/part-of: slack-prototype
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: slack-prototype
+  name: resource-sample
+spec:
+  # TODO(user): Add fields here
