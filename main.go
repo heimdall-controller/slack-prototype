@@ -29,7 +29,6 @@ import (
 	clientgoscheme "k8s.io/client-go/kubernetes/scheme"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
-
 	"github.com/heimdall-controller/slack-prototype/controllers"
 	//+kubebuilder:scaffold:imports
 )
@@ -83,7 +82,6 @@ func main() {
 	}
 
 	//+kubebuilder:scaffold:builder
-
 	setupLog.Info("starting manager")
 	if err := mgr.Start(ctrl.SetupSignalHandler()); err != nil {
 		setupLog.Error(err, "problem running manager")
