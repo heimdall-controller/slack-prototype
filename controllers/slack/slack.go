@@ -5,7 +5,6 @@ import (
 	"github.com/slack-go/slack"
 	slackclient "github.com/slack-go/slack"
 	corev1 "k8s.io/api/core/v1"
-	"strconv"
 )
 
 type Notification struct {
@@ -13,7 +12,7 @@ type Notification struct {
 }
 
 // SendEvent SendMessage sends a message using all current senders
-func SendEvent(event *corev1.Event, secret *corev1.Secret) {
+func SendEvent(pod *corev1.Pod, secret *corev1.Secret) {
 	token := secret.Data["token"]
 	channel := secret.Data["channel"]
 	logrus.Infof("Sending event to slack channel %s", channel)
@@ -23,25 +22,16 @@ func SendEvent(event *corev1.Event, secret *corev1.Secret) {
 	attachment := slackclient.Attachment{
 		Fields: []slackclient.AttachmentField{
 			{
-				Title: "Object Kind: " + event.InvolvedObject.Kind,
+				Title: "Object Kind: " + pod.Kind,
 			},
 			{
-				Title: "Object Name: " + event.InvolvedObject.Name,
+				Title: "Object Name: " + pod.Name,
 			},
 			{
-				Title: "Namespace: " + event.InvolvedObject.Namespace,
+				Title: "Namespace: " + pod.Namespace,
 			},
 			{
-				Title: "Count: " + strconv.Itoa(int(event.Count)),
-			},
-			{
-				Title: "Reason: " + event.Reason,
-			},
-			{
-				Title: "First Timestamp: " + event.FirstTimestamp.String(),
-			},
-			{
-				Title: "Last Timestamp: " + event.LastTimestamp.String(),
+				Title: "Oh no! Please monitor your resource!",
 			},
 		},
 	}
